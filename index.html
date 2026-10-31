@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>MiiNem Code — Artificial Intelligence (Fake Edition)</title>
+    <meta name="description" content="MiiNem Code — Uma IA de programação extremamente limitada. Alpha 1a.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#070D1A',
+                        panel: '#0D1729',
+                        primary: '#2583FF',
+                        electric: '#48A5FF',
+                        muted: '#8193B0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['monospace']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #070D1A;
+            color: #E8F1FF;
+            font-family: Inter, system-ui, sans-serif;
+        }
+
+        ::selection {
+            background: #2583FF;
+            color: white;
+        }
+
+        .gradient-text {
+            background: linear-gradient(110deg, #FFFFFF 15%, #48A5FF 85%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .blue-border {
+            border: 1px solid rgba(65, 145, 255, 0.19);
+        }
+
+        .tech-card {
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+
+        .tech-card:hover {
+            border-color: rgba(65, 145, 255, .65);
+            background: #101F38;
+            transform: translateY(-3px);
+        }
+
+        .download-card {
+            transition: border-color .2s, background .2s;
+        }
+
+        .download-card:hover {
+            border-color: rgba(65, 145, 255, .55);
+        }
+
+        .grid-background {
+            background-image:
+                linear-gradient(rgba(37, 131, 255, .035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 131, 255, .035) 1px, transparent 1px);
+            background-size: 42px 42px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #3998FF;
+            display: inline-block;
+        }
+
+        .terminal {
+            background: #080F1D;
+            border: 1px solid rgba(65, 145, 255, .2);
+        }
+
+        .terminal-line {
+            color: #8EBBFF;
+        }
+
+        .disabled-button {
+            cursor: not-allowed;
+            opacity: .35;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 border-b border-blue-400/10 bg-midnight/90 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600/15 border border-blue-400/20 flex items-center justify-center text-blue-400">
+                    <i data-lucide="terminal" class="w-5 h-5"></i>
+                </div>
+
+                <span class="font-bold text-lg tracking-tight">
+                    MiiNem <span class="text-blue-400">Code</span>
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm text-slate-400">
+                <a href="#sobre" class="hover:text-blue-400 transition">Sobre</a>
+                <a href="#recursos" class="hover:text-blue-400 transition">Capacidades</a>
+                <a href="#tecnologias" class="hover:text-blue-400 transition">Tecnologias</a>
+                <a href="#download" class="hover:text-blue-400 transition">Download</a>
+            </nav>
+
+            <a href="#download" class="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-500 transition px-4 py-2.5 rounded-lg text-sm font-semibold">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                Baixar
+            </a>
+
+            <button id="menu-button" class="md:hidden text-slate-300 p-2" aria-label="Abrir menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="hidden md:hidden border-t border-blue-400/10 px-6 py-5 space-y-4 bg-midnight">
+            <a href="#sobre" class="block text-slate-300 text-sm">Sobre</a>
+            <a href="#recursos" class="block text-slate-300 text-sm">Capacidades</a>
+            <a href="#tecnologias" class="block text-slate-300 text-sm">Tecnologias</a>
+            <a href="#download" class="block text-blue-400 text-sm">Download</a>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section id="sobre" class="relative min-h-screen flex items-center pt-28 overflow-hidden grid-background">
+
+            <div class="absolute top-32 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-blue-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-6xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+
+                <div>
+                    <div class="inline-flex items-center gap-2 border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 rounded-full text-xs text-blue-300 mb-8">
+                        <span class="status-dot"></span>
+                        ALPHA 1a — EXPERIMENTAL SOFTWARE
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-[1.08] mb-7">
+                        Programar nunca foi tão
+                        <span class="gradient-text">questionável.</span>
+                    </h1>
+
+                    <p class="text-slate-400 text-lg leading-relaxed max-w-xl mb-9">
+                        Conheça o <strong class="text-white">MiiNem Code</strong>.
+                        Uma IA de programação completamente falsa que simula
+                        a criação de programas simples. Inteligência artificial?
+                        Não exatamente. Inteligência pré-programada? Agora sim.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#download" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 transition rounded-xl px-6 py-3.5 font-semibold text-sm">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Obter MiiNem Code
+                        </a>
+
+                        <a href="#recursos" class="inline-flex items-center gap-2 border border-blue-400/20 hover:bg-blue-400/10 transition rounded-xl px-6 py-3.5 font-semibold text-sm text-slate-300">
+                            Conhecer o projeto
+                            <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-6 mt-12 text-xs text-slate-500">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="code-2" class="w-4 h-4 text-blue-400"></i>
+                            Alpha 1a
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="monitor" class="w-4 h-4 text-blue-400"></i>
+                            Linux
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="flask-conical" class="w-4 h-4 text-blue-400"></i>
+                            Experimental
+                        </span>
+                    </div>
+                </div>
+
+                <!-- TERMINAL PREVIEW -->
+                <div class="terminal rounded-2xl overflow-hidden">
+
+                    <div class="flex items-center justify-between px-5 py-4 border-b border-blue-400/10">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-500/50"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600/30"></span>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono">miinem-code.exe</span>
+                    </div>
+
+                    <div class="p-6 md:p-8 font-mono text-sm space-y-5">
+
+                        <div>
+                            <p class="text-slate-500"># MiiNem Code — Alpha 1a</p>
+                            <p class="text-blue-400 mt-2">miinem@code:~$ start</p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <p class="text-slate-400">Inicializando inteligência artificial...</p>
+                            <p class="text-blue-300">[OK] Base de código carregada.</p>
+                            <p class="text-blue-300">[OK] Lógica pré-definida carregada.</p>
+                            <p class="text-blue-300">[OK] Expectativas reduzidas.</p>
+                        </div>
+
+                        <div class="border-l-2 border-blue-500 pl-4 py-2">
+                            <p class="text-slate-500 text-xs mb-2">USUÁRIO</p>
+                            <p class="text-white">Crie um programa Hello World.</p>
+                        </div>
+
+                        <div class="border-l-2 border-blue-400 pl-4 py-2">
+                            <p class="text-blue-400 text-xs mb-2">MIINEM CODE</p>
+                            <p class="text-slate-300">Analisando solicitação...</p>
+                            <p class="text-slate-300 mt-2">Programa encontrado na minha memória artificial!</p>
+                            <p class="text-blue-300 mt-2">Hello, World!</p>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-blue-400">
+                            <span>miinem@code:~$</span>
+                            <span class="w-2 h-4 bg-blue-400 animate-pulse"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- RECURSOS -->
+        <section id="recursos" class="py-28 border-t border-blue-400/10">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="max-w-2xl mb-16">
+                    <span class="text-blue-400 text-xs font-bold tracking-[.2em] uppercase">Capacidades extraordinariamente limitadas</span>
+
+                    <h2 class="text-4xl md:text-5xl font-bold mt-5 mb-6 tracking-tight">
+                        Poderes fracos.<br>
+                        <span class="text-blue-400">Ambições gigantes.</span>
+                    </h2>
+
+                    <p class="text-slate-400 leading-relaxed">
+                        O MiiNem Code não pretende revolucionar a programação.
+                        Na verdade, ele mal consegue sair do próprio roteiro.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                    <div class="blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Inteligência pré-definida</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Nada de raciocínio revolucionário. Todas as respostas
+                            seguem uma lógica engessada e já implementada na base de código.
+                        </p>
+                    </div>
+
+                    <div class="blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Zero alucinações</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Como não existe uma IA generativa de verdade,
+                            não existem alucinações. Ele só faz aquilo que foi programado para fazer.
+                        </p>
+                    </div>
+
+                    <div class="blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                            <i data-lucide="code" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Código simples</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Simula a criação de programas básicos.
+                            Não espere que ele desenvolva o próximo sistema operacional.
+                        </p>
+                    </div>
+
+                    <div class="blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                            <i data-lucide="list-checks" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Lógica controlada</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Cada comportamento é definido antecipadamente.
+                            Criatividade? Só se alguém tiver programado.
+                        </p>
+                    </div>
+
+                    <div class="blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Execução direta</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Recebe uma solicitação, verifica as possibilidades
+                            disponíveis e entrega uma resposta prevista.
+                        </p>
+                    </div>
+
+                    <div class="blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Estado experimental</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Está em alpha. Algumas funcionalidades podem ser limitadas,
+                            incompletas ou simplesmente inexistentes.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-8 rounded-xl border border-blue-400/15 bg-blue-500/5 p-5 flex gap-4 items-start">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-400 shrink-0 mt-0.5"></i>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        <strong class="text-blue-300">Transparência total:</strong>
+                        MiiNem Code é um utilitário de simulação. Não é um modelo
+                        de linguagem, não possui inteligência artificial generativa
+                        e não aprende com as conversas.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- TECNOLOGIAS -->
+        <section id="tecnologias" class="py-28 bg-[#091222] border-y border-blue-400/10">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-blue-400 text-xs font-bold tracking-[.2em] uppercase">Por trás da máquina</span>
+
+                    <h2 class="text-4xl md:text-5xl font-bold mt-5 mb-6">
+                        Construído com <span class="gradient-text">tecnologias.</span>
+                    </h2>
+
+                    <p class="text-slate-400 leading-relaxed">
+                        Uma stack um tanto inesperada. Quatro tecnologias,
+                        uma missão e uma quantidade questionável de inteligência.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    <div class="tech-card blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="text-blue-400 mb-7">
+                            <i data-lucide="code-2" class="w-9 h-9"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">C</h3>
+                        <p class="text-xs text-slate-500 mb-5">Linguagem de programação</p>
+                        <p class="text-sm text-slate-400">A base que faz as coisas realmente acontecerem.</p>
+                    </div>
+
+                    <div class="tech-card blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="text-blue-400 mb-7">
+                            <i data-lucide="app-window" class="w-9 h-9"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">GTK</h3>
+                        <p class="text-xs text-slate-500 mb-5">Interface gráfica</p>
+                        <p class="text-sm text-slate-400">Para transformar código em janelas bonitas.</p>
+                    </div>
+
+                    <div class="tech-card blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="text-blue-400 mb-7">
+                            <i data-lucide="palette" class="w-9 h-9"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">CSS</h3>
+                        <p class="text-xs text-slate-500 mb-5">Estilização</p>
+                        <p class="text-sm text-slate-400">Porque até uma IA falsa merece um visual decente.</p>
+                    </div>
+
+                    <div class="tech-card blue-border rounded-2xl p-7 bg-panel/70">
+                        <div class="text-blue-400 mb-7">
+                            <i data-lucide="heart" class="w-9 h-9"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fé</h3>
+                        <p class="text-xs text-slate-500 mb-5">Tecnologia espiritual</p>
+                        <p class="text-sm text-slate-400">Porque C, GTK e CSS não fazem milagres sozinhos.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- DOWNLOAD -->
+        <section id="download" class="py-28">
+
+            <div class="max-w-5xl mx-auto px-6">
+
+                <div class="text-center mb-16">
+                    <span class="text-blue-400 text-xs font-bold tracking-[.2em] uppercase">Distribuição oficial</span>
+
+                    <h2 class="text-4xl md:text-5xl font-bold mt-5 mb-6">
+                        Experimente o <span class="gradient-text">MiiNem Code.</span>
+                    </h2>
+
+                    <p class="text-slate-400 max-w-xl mx-auto leading-relaxed">
+                        Disponível para Linux nesta primeira build.
+                        Outros sistemas operacionais terão que esperar.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-5">
+
+                    <!-- LINUX -->
+                    <div class="download-card blue-border rounded-2xl bg-panel p-7 md:col-span-1">
+
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
+                                <i data-lucide="terminal" class="w-6 h-6"></i>
+                            </div>
+
+                            <span class="text-[10px] font-bold tracking-wider text-blue-300 bg-blue-500/10 border border-blue-400/20 rounded-full px-3 py-1">
+                                DISPONÍVEL
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-2">Linux</h3>
+                        <p class="text-sm text-slate-400 mb-7">Distribuições baseadas em Debian.</p>
+
+                        <div class="border border-blue-400/10 bg-[#080F1D] rounded-lg p-3 mb-6">
+                            <p class="text-[10px] text-slate-500 mb-2">PACOTE</p>
+                            <p class="text-xs font-mono text-blue-300 break-all">
+                                miinem-code_alpha1a-1.deb
+                            </p>
+                        </div>
+
+                        <a href="./miinem-code_alpha1a-1.deb"
+                           download="miinem-code_alpha1a-1.deb"
+                           class="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-500 transition rounded-xl py-3.5 text-sm font-semibold">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Baixar para Linux
+                        </a>
+
+                    </div>
+
+
+                    <!-- WINDOWS -->
+                    <div class="download-card border border-blue-400/10 rounded-2xl bg-panel/50 p-7">
+
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/5 flex items-center justify-center text-slate-600">
+                                <i data-lucide="monitor" class="w-6 h-6"></i>
+                            </div>
+
+                            <span class="text-[10px] font-bold tracking-wider text-slate-500 bg-slate-500/10 border border-slate-500/10 rounded-full px-3 py-1">
+                                INDISPONÍVEL
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-2 text-slate-400">Windows</h3>
+                        <p class="text-sm text-slate-500 mb-7">Suporte ainda não implementado.</p>
+
+                        <div class="border border-blue-400/5 bg-[#080F1D]/60 rounded-lg p-3 mb-6">
+                            <p class="text-xs text-slate-600">Nenhum pacote disponível.</p>
+                        </div>
+
+                        <button disabled class="disabled-button flex items-center justify-center gap-2 w-full bg-slate-700 rounded-xl py-3.5 text-sm font-semibold text-slate-400">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                            Não disponível
+                        </button>
+
+                    </div>
+
+
+                    <!-- MACOS -->
+                    <div class="download-card border border-blue-400/10 rounded-2xl bg-panel/50 p-7">
+
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/5 flex items-center justify-center text-slate-600">
+                                <i data-lucide="laptop" class="w-6 h-6"></i>
+                            </div>
+
+                            <span class="text-[10px] font-bold tracking-wider text-slate-500 bg-slate-500/10 border border-slate-500/10 rounded-full px-3 py-1">
+                                INDISPONÍVEL
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-2 text-slate-400">macOS</h3>
+                        <p class="text-sm text-slate-500 mb-7">Suporte ainda não implementado.</p>
+
+                        <div class="border border-blue-400/5 bg-[#080F1D]/60 rounded-lg p-3 mb-6">
+                            <p class="text-xs text-slate-600">Nenhum pacote disponível.</p>
+                        </div>
+
+                        <button disabled class="disabled-button flex items-center justify-center gap-2 w-full bg-slate-700 rounded-xl py-3.5 text-sm font-semibold text-slate-400">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                            Não disponível
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <p class="text-center text-xs text-slate-600 mt-8">
+                    MiiNem Code Alpha 1a · Pacote Debian (.deb)
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- FINAL CTA -->
+        <section class="pb-28 px-6">
+
+            <div class="max-w-5xl mx-auto rounded-3xl border border-blue-400/20 bg-gradient-to-br from-blue-950/80 to-[#0A1425] p-10 md:p-16 text-center">
+
+                <div class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-400 mx-auto mb-7">
+                    <i data-lucide="terminal" class="w-7 h-7"></i>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold mb-5">
+                    Não é inteligência artificial.<br>
+                    <span class="text-blue-400">Mas pelo menos é honesto.</span>
+                </h2>
+
+                <p class="text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">
+                    MiiNem Code. Um pequeno experimento de programação,
+                    com grandes limitações e uma identidade própria.
+                </p>
+
+                <a href="#download" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 transition rounded-xl px-7 py-3.5 font-semibold text-sm">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    Experimentar agora
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="border-t border-blue-400/10 bg-[#060B14]">
+
+        <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-blue-600/15 flex items-center justify-center text-blue-400">
+                    <i data-lucide="terminal" class="w-4 h-4"></i>
+                </div>
+
+                <div>
+                    <p class="font-bold text-sm">MiiNem Code</p>
+                    <p class="text-[10px] text-slate-600">Alpha 1a · Experimental Utility</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600 text-center">
+                Um utilitário de simulação. Não uma IA de verdade.
+            </p>
+
+            <p class="text-xs text-slate-600">
+                © 2026 MiiNem Code.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Inicialização dos ícones Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+
+            const isOpen = !mobileMenu.classList.contains('hidden');
+
+            menuButton.innerHTML = isOpen
+                ? '<i data-lucide="x"></i>'
+                : '<i data-lucide="menu"></i>';
+
+            lucide.createIcons();
+        });
+
+        // Fechar menu ao navegar
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuButton.innerHTML = '<i data-lucide="menu"></i>';
+                lucide.createIcons();
+            });
+        });
+    </script>
+
+</body>
+</html>
